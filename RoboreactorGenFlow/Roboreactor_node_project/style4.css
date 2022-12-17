@@ -1,0 +1,17 @@
+.loading-area{
+  background-color: #FFF;
+  border-radius: 20px !important;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 30%;
+  width: 15%;
+}
+.loading-text{
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+}
+.loading-image{
+  height: 80px;
+  width: 80px;
+  padding-top: 20px;
+}
