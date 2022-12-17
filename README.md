@@ -88,7 +88,7 @@ country=GB # United Kingdom
 
 ```
 cd ~
-git clone github.com/roboreactor/genflow-mini
+git clone https://github.com/roboreactor/genflow-mini
 ```
 
 3. Copy the `data_token_secret_key.json` into your sbc `./genflow-mini` folder with [WinSCP](https://winscp.net/eng/download.php)
