@@ -70,13 +70,14 @@ if str(ar_os) in compat_gpio_board:
     from adafruit_pca9685 import PCA9685
     from adafruit_motor import servo
     import busio
-    from board import SCL, SDA
-    if str(ar_os) == list_support_os[1]:
+    #print(ar_os,list_support_os[1])
+    if str(ar_os) != list_support_os[0]:
+        from board import SCL, SDA
         if 'Raspberrypi architecture' == os_service.json().get(str(ar_os)):  # Checking if the raspbe>
             import gpiozero
             from gpiozero import Robot, MCP3008
             from gpiozero import PhaseEnableMotor  # Getting the motor to working
-    i2c_bus = busio.I2C(SCL, SDA)
+        i2c_bus = busio.I2C(SCL, SDA)
 
 
 # Getting the analog value input from the library
@@ -92,8 +93,7 @@ if str(ar_os) in compat_gpio_board:
 #    pass
 
 # The file need to be the static name inorder toload the file for authentication
-path_token_secret_key = "/home/" + \
-    str(os.listdir("/home/")[0])+"/RoboreactorGenFlow/"
+path_token_secret_key = "/home/"+str(os.listdir("/home/")[0])+"/RoboreactorGenFlow/"
 try:
     # Load the json data in local computer this file need to be export from the website
     Load_json = open(path_token_secret_key+"data_token_secret.json", 'r')
@@ -106,13 +106,11 @@ try:
 except:
     pass
 
-try:
-    # Getting the project data to verify the project data to post request sendback the data
-    Data = Authentication_system(
-        Account_data, Token_data, Secret_data, Project_data)
-    print(Data)  # Getting the email to verfy the data to send back to request the project and send back data to the user profile information
-except:
-    pass
+
+# Getting the project data to verify the project data to post request sendback the data
+Data = Authentication_system(Account_data, Token_data, Secret_data, Project_data)
+print(Data)  # Getting the email to verfy the data to send back to request the project and send back data to the user profile information
+
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # These function only able to enable from the singleboard computer
 #user = getpass.getuser()
@@ -1555,7 +1553,7 @@ def Camera_face_rec_sub_node(cam_num, buffers, port, port_message, ip_number):
          str(buffers)+","+str(port)+","+str(port_message)+",'"+str(ip_number)+"')")
 
 
-def Camera_yolo_sub_node(cam_num, Buffers, portdata, port_message, ip_number, display_status, object_labels, model_prototxt, model_caffe_weights):
+def Camera_yolo_pub_node(cam_num, Buffers, portdata, port_message, ip_number, display_status, object_labels, model_prototxt, model_caffe_weights):
 
     cam_object_recog = Visual_Cam_optic()
     cam_object_recog.Camera_yolo(cam_num, Buffers, portdata, port_message, ip_number,
