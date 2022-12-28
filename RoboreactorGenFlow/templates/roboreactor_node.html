@@ -74,11 +74,39 @@
     </div>
     <section class="sidebar">
         <ul class="treeview">
+            <div style="margin: 10px;"></div>
             <li>
-                <input type="checkbox" name="tall-0" id="tall-0">
-                <label for="tall-0">
+                <input type="checkbox" name="tips" id="tips">
+                <label for="tips">
+                    <i>&nbsp;</i>
+                    <i class="fas fa-lightbulb"></i>
+                    <i>&nbsp; tips</i>
+                </label>
+                <ul>
+                    <li>
+                        <div>
+                            <label style="background-color: #00BFFF; ">
+                                <i>&nbsp;</i>
+                                <i>
+                                    <p><b><u>Shortkeys:</u></b></p>
+                                    <p> ❌ Delete == remove selected<br>
+                                        &emsp;&nbsp;&nbsp;Mouse Right == Delete Option<br>
+                                        🔍 Ctrl + Wheel == Zoom<br>
+                                        💠 Mouse Left Click == Move<br>
+                                    </p>
+                                </i>
+                            </label>
+                        </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="tools" id="tools">
+                <label for="tools">
                     <i>&nbsp;</i>
                     <i class="fas fa-tools"></i>
+                    <i>&nbsp; tools</i>
                 </label>
                 <ul>
                     <li>
@@ -135,277 +163,249 @@
                 </ul>
             </li>
             <li>
-                <input type="checkbox" name="tall" id="tall">
-                <label for="tall">
+                <input type="checkbox" name="nodes-1" id="nodes-1">
+                <label for="nodes-1">
                     <i>&nbsp;</i>
-                    <i class="fas fa-project-diagram"></i>
+                    <i>communication</i>
                 </label>
-                <!-- gen_import_node_html{ -->
                 <ul>
                     <li>
-                        <input type="checkbox" name="tall-1" id="tall-1">
-                        <label for="tall-1">
-                            <i>&nbsp;</i>
-                            <i>communication</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="pub_node">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Create_pub_node</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="sub_node">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Create_sub_node</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="multiple">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Create_multi_node</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Serial_com">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Create_serial_read_node</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Serial_write_com">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Create_serial_write_node</i>
-                                    </label>
-                                </div>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-2" id="tall-2">
-                        <label for="tall-2">
-                            <i>&nbsp;</i>
-                            <i>Vision system</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Normal_camera">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Camera input</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Multi_cache_server">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Multicache_camera_streaming</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Face_recognition">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Face recognition</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Body_detection">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Body detection</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Object_detection">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Object detection</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Object_recognition">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Object recognition</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="OCR_Scanner">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>OCR image processing</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="QR_Scanner">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>QR code detection</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Pose_detection">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Pose detection</i>
-                                    </label>
-                                </div>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-3" id="tall-3">
-                        <label for="tall-3">
-                            <i>&nbsp;</i>
-                            <i>Audio system</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Speech_recognition">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Speech recognition</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="TTS">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Text to speech</i>
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-4" id="tall-4">
-                        <label for="tall-4">
-                            <i>&nbsp;</i>
-                            <i>Odometry system</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Odometry_sensor">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Odometry sensor</i>
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-5" id="tall-5">
-                        <label for="tall-5">
-                            <i>&nbsp;</i>
-                            <i>Navigation system</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="GPS_data">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>GPS</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Lidar_system">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Lidar</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="template">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Beacon</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="template">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Sonar mapping</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="template">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Sound navigation</i>
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-6" id="tall-6">
-                        <label for="tall-6">
-                            <i>&nbsp;</i>
-                            <i>Sensor Array system</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Sensor_Array">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Sensor array list</i>
-                                    </label>
-                                </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-7" id="tall-7">
-                        <label for="tall-7">
-                            <i>&nbsp;</i>
-                            <i>NLP and language translation</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="NLP">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>NLP function</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Translator">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Language translation</i>
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="tall-8" id="tall-8">
-                        <label for="tall-8">
-                            <i>&nbsp;</i>
-                            <i>Motion system</i>
-                        </label>
-                        <ul>
-                            <li>
-                                <div draggable="true" ondragstart="drag(event)" data-node="DC_motor">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>DC motor control</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="Stepper_motor">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Stepper motor</i>
-                                    </label>
-                                </div>
-                                <div draggable="true" ondragstart="drag(event)" data-node="BLDC_motor">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>BLDC motor</i>
-                                    </label>
-                                </div>
-
-                                <div draggable="true" ondragstart="drag(event)" data-node="Servo_motor">
-                                    <label style="background-color: #00BFFF;">
-                                        <i>&nbsp;</i>
-                                        <i>Servo motor</i>
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="pub_node">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Create_pub_node</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="sub_node">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Create_sub_node</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="multiple">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Create_multi_node</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Serial_com">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Create_serial_read_node</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Serial_write_com">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Create_serial_write_node</i>
+                            </label>
+                        </div>
+                </ul>
             </li>
-        </ul>
+            <li>
+                <input type="checkbox" name="nodes-2" id="nodes-2">
+                <label for="nodes-2">
+                    <i>&nbsp;</i>
+                    <i>Vision system</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Normal_camera">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Camera input</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Multi_cache_server">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Multicache_camera_streaming</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Face_recognition">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Face recognition</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Body_detection">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Body detection</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Object_detection">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Object detection</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Object_recognition">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Object recognition</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="OCR_Scanner">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>OCR image processing</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="QR_Scanner">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>QR code detection</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Pose_detection">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Pose detection</i>
+                            </label>
+                        </div>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="nodes-3" id="nodes-3">
+                <label for="nodes-3">
+                    <i>&nbsp;</i>
+                    <i>Audio system</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Speech_recognition">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Speech recognition</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="TTS">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Text to speech</i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="nodes-4" id="nodes-4">
+                <label for="nodes-4">
+                    <i>&nbsp;</i>
+                    <i>Odometry system</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Odometry_sensor">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Odometry sensor</i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="nodes-5" id="nodes-5">
+                <label for="nodes-5">
+                    <i>&nbsp;</i>
+                    <i>Navigation system</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="GPS_data">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>GPS</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Lidar_system">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Lidar</i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="nodes-6" id="nodes-6">
+                <label for="nodes-6">
+                    <i>&nbsp;</i>
+                    <i>Sensor Array system</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Sensor_Array">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Sensor array list</i>
+                            </label>
+                        </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="nodes-7" id="nodes-7">
+                <label for="nodes-7">
+                    <i>&nbsp;</i>
+                    <i>NLP and language translation</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="NLP">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>NLP function</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Translator">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Language translation</i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" name="nodes-8" id="nodes-8">
+                <label for="nodes-8">
+                    <i>&nbsp;</i>
+                    <i>Motion system</i>
+                </label>
+                <ul>
+                    <li>
+                        <div draggable="true" ondragstart="drag(event)" data-node="DC_motor">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>DC motor control</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="Stepper_motor">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Stepper motor</i>
+                            </label>
+                        </div>
+                        <div draggable="true" ondragstart="drag(event)" data-node="BLDC_motor">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>BLDC motor</i>
+                            </label>
+                        </div>
+
+                        <div draggable="true" ondragstart="drag(event)" data-node="Servo_motor">
+                            <label style="background-color: #00BFFF;">
+                                <i>&nbsp;</i>
+                                <i>Servo motor</i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
     </section>
 
     <script>
@@ -467,7 +467,7 @@
                 list_node = Object.keys(node_name_values);
                 console.log(list_node);
                 for (var rt in list_node) {
-                    print(list_node[rt])
+                    console.log(list_node[rt]);
                     var text_remove = list_node[rt].split("_")[2]
                     console.log(text_remove);
                     if (parseInt(text_remove) == parseInt(id)) {
@@ -584,70 +584,6 @@
         editor.on('removeReroute', function (id) {
             console.log("Reroute removed " + id); // Reroute status
 
-        })
-
-        const nodesSelected = [];
-        editor.on("clickEnd", (e) => {
-            const shiftKey = e.shiftKey;
-            if (shiftKey) {
-                if (editor.node_selected !== null) {
-                    const nodeId = editor.node_selected.id.slice(5);
-                    const indexSelected = nodesSelected.indexOf(nodeId);
-                    if (indexSelected === -1) {
-                        nodesSelected.push(nodeId);
-                    } else {
-                        nodesSelected.splice(indexSelected, 1);
-                        const nodeUnselected = document.getElementById(`node-${nodeId}`);
-                        nodeUnselected.classList.remove("selected");
-                    }
-                } else {
-                    nodesSelected.forEach(eleN => {
-                        const node = document.getElementById(`node-${eleN}`);
-                        node.classList.remove("selected");
-                    });
-                    nodesSelected.splice(0, nodesSelected.length);
-                }
-                nodesSelected.forEach(eleN => {
-                    const node = document.getElementById(`node-${eleN}`);
-                    node.classList.add("selected");
-                });
-            } else {
-                nodesSelected.forEach(eleN => {
-                    const node = document.getElementById(`node-${eleN}`);
-                    node.classList.remove("selected");
-                });
-                nodesSelected.splice(0, nodesSelected.length);
-            }
-
-        });
-
-        let last_x = 0;
-        let last_y = 0;
-        editor.on("mouseMove", ({ x, y }) => {
-            if (editor.node_selected && editor.drag) {
-                editor.node_selected.classList.add("selected");
-                const nodeId = editor.node_selected.id.slice(5);
-                const indexSelected = nodesSelected.indexOf(nodeId);
-                if (indexSelected === -1) {
-                    nodesSelected.push(nodeId);
-                }
-                nodesSelected.forEach(eleN => {
-                    if (eleN != editor.node_selected.id.slice(5)) {
-                        const node = document.getElementById(`node-${eleN}`);
-                        var xnew = (last_x - x) * editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom);
-                        var ynew = (last_y - y) * editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom);
-
-                        node.style.top = (node.offsetTop - ynew) + "px";
-                        node.style.left = (node.offsetLeft - xnew) + "px";
-
-                        editor.drawflow.drawflow[editor.module].data[eleN].pos_x = (node.offsetLeft - xnew);
-                        editor.drawflow.drawflow[editor.module].data[eleN].pos_y = (node.offsetTop - ynew);
-                        editor.updateConnectionNodes(`node-${eleN}`);
-                    }
-                });
-            }
-            last_x = x;
-            last_y = y;
         })
 
         var elements = document.getElementsByClassName('drag-drawflow');

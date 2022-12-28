@@ -188,7 +188,7 @@ body {
   background: rgba(0, 0, 0, 0);
   padding: 5px 10px;
   top: -3px;
-  left: -4px;
+  left: 1px;
   height: calc(100% + 3px);
   width: fit-content;
   position: fixed;
