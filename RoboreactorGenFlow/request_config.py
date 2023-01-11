@@ -396,15 +396,55 @@ def Stop_request():
 
             except:  
                 print("Error server connection to stop the project")
+def upload_maneger():
+  for i in count(0):
+    try:
+        user = device_name
+        res_update = requests.get("https://roboreactor.com/software_update")  # Update software from the request
+        software_update = res_update.json().get(Account_data) # Getting the data of the request
+        if software_update !="None":
+              if software_update == {}:
+                      print("No data inside the payload")
+                      
+              if software_update !={}:
+                  
+                      print("Data in payload update",software_update)
+                      if software_update.get('upload') == "ON":
+                                     data_soft = software_update.get("github") # Getting the github link data to run in the git clone update the new middleware   
+                                     print(data_soft) # Clone here
+                                     firmware_inside = os.listdir("/home/"+user+"/") # Getting the firmware update from the   
+                                     print(firmware_inside)
+                                     middle_ware_name = data_soft.split("/")[len(data_soft.split("/"))-1]
+                                     if middle_ware_name in firmware_inside:
+                                              #Check if there is a data token secret key inside the system or not then run the command to back up the datatoken secret key to the home directory 
+                                              token_inside = os.listdir("/home/"+user+"/"+middle_ware_name)
+                                              if "data_token_secret.json" in token_inside: 
+                                                       print("Move the data_token_secret.json to the home directory of the computer") 
+                                                       os.system("sudo mv /home/"+user+"/"+middle_ware_name+"/data_token_secret.json -t "+"/home/"+user)  # Remove the data_token_secret_key to the home directory                                           
+                                     if middle_ware_name not in firmware_inside:         
+                                              os.system("sudo rm -rf /home/"+user+"/"+middle_ware_name) # Remove the middle ware name before added the new on into the computer 
+                                              os.system("git -C /home/"+user+ " clone "+str(data_soft)) # Clone the github data into the computer
+                                              os.system("sudo mv /home/"+user+"/data_token_secret.json -t "+"/home/"+user+"/"+middle_ware_name)  
 
+                                     payload_update = {Account_data:{'upload':'OFF','github':data_soft}}
+                                     try:
+                                             res_off_update = requests.post("https://roboreactor.com/software_update_stop",json=payload_update) # Sending back the payload update function
+                                     except:
+                                          print("Server fail connection on update!")
+
+                     
+    except:
+          print("Error connecting server")
 # Running multithread 
 t1 = threading.Thread(target=Main_request)
 t2 = threading.Thread(target=side_request) 
 t3 = threading.Thread(target=Generate_request)
 t4 = threading.Thread(target=Restart_request)
 t5 = threading.Thread(target=Stop_request)
+t6 = threading.Thread(target=upload_maneger)
 t1.start()
 t2.start()
 t3.start()
 t4.start() 
 t5.start() 
+t6.start() 
