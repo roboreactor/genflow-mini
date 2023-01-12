@@ -151,7 +151,8 @@ sudo apt-get install openssh-server -y
 echo "Install Htop"
 sudo apt-get install htop -y
 sudo apt-get install snap -y
-
+curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
+sudo apt-get install rust -y
 #sudo apt-get install arduino -y 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
