@@ -421,10 +421,14 @@ def upload_maneger():
                                               if "data_token_secret.json" in token_inside: 
                                                        print("Move the data_token_secret.json to the home directory of the computer") 
                                                        os.system("sudo mv /home/"+user+"/"+middle_ware_name+"/data_token_secret.json -t "+"/home/"+user)  # Remove the data_token_secret_key to the home directory                                           
+                                              os.system("sudo rm -rf /home/"+user+"/"+middle_ware_name)  
+                                              os.system("git -C /home/"+user+ " clone "+str(data_soft)) 
+                                              os.system("sudo mv /home/"+user+"/data_token_secret.json -t "+"/home/"+user+"/"+middle_ware_name)
+
                                      if middle_ware_name not in firmware_inside:         
-                                              os.system("sudo rm -rf /home/"+user+"/"+middle_ware_name) # Remove the middle ware name before added the new on into the computer 
                                               os.system("git -C /home/"+user+ " clone "+str(data_soft)) # Clone the github data into the computer
-                                              os.system("sudo mv /home/"+user+"/data_token_secret.json -t "+"/home/"+user+"/"+middle_ware_name)  
+                                              if "data_token_secret.json" in token_inside:
+                                                         os.system("sudo mv /home/"+user+"/data_token_secret.json -t "+"/home/"+user+"/"+middle_ware_name)  
 
                                      payload_update = {Account_data:{'upload':'OFF','github':data_soft}}
                                      try:
