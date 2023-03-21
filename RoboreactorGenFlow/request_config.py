@@ -33,9 +33,17 @@ check_same_IO = [] # Check GPIO is the same pin generated inside the loop or not
 board_catg = {} # Get the board category data 
 #get the data of the joint function communication 
 sbc_communication = {} 
+feedback_sensor_type = {} # get the feedback sensor type of data to check the analog sensor input from te list of the joint 
+feedback_signal_intercept = {} # Check the data signal interception 
+Check_hardware_board = {} #get the hardware board 
 data_io_control = {'Servo_PWM_output':'s','PWM_output':'p'} # Get the data IO output and input 
 #Getting the operating system and machine data of the user
 os_platform = os.uname() # uname 
+feedback_sensor_type = {} # get the feedback sensor type of data to check the analog sensor input from te list of the joint 
+feedback_signal_intercept = {} # Check the data signal interception 
+Check_hardware_board = {} #get the hardware board 
+payload_feedback = ['{']   # Get the payload feedback to append in this list so that we can generate the variable for the joint feedback payload control 
+payload_joints_container = [] # Get all data to record in the joint payload container
 
 os_system = os_platform.sysname
 os_release = os_platform.release
@@ -521,7 +529,15 @@ def Joint_remote_control():
                                        serial_list[port_type] = list(serial_separator)  # get the list of the serial ssperator in here to running in the loop generate the control function 
                                        Commu_check_data[joints] = port_type+","+board_controller
                                        print("Data_port_container",serial_group,serial_separator,serial_list,Commu_check_data)# Get the serial data list group and separator           
-
+                                       feed_back_sensor_check = joint_dats.get(joints).get(board_controller).get('Pin_analog_sensor') # Check of the pin analog sensor is exist 
+                                       if feed_back_sensor_check != {}:
+                                                       print("Check the data of the feedback sensor") #After found the data of the  feedback sensor extract them and categorized base on signal and purpose 
+                                                       print("Feedback_sensor data ",feed_back_sensor_check)
+                                                       feedback_sense = joint_dats.get(joints).get(board_controller).get("Signal_fbs")
+                                                       print("Check type of signal input feedback sensor ",feedback_sense) # Get the feedback sensor type of data 
+                                                       feedback_sensor_type[joints] = {feedback_sense:feed_back_sensor_check} # Get the feedback sensor 
+                                                       print("Feed_back group check signal category ",feedback_sensor_type)
+                                                        
                           if board_controller == "SBC":   
                                  print(joints,joint_dats.get(joints).get(board_controller))        
                                  #Get the communication data_type 
@@ -570,8 +586,15 @@ def Joint_remote_control():
                                                                                        port_ad = serial_group.get(joints_com)
                                                                                        print("Serial port address ",port_ad)
                                                                                        code_gens.write("\n\thardware_"+port_ad.split("/")[len(port_ad.split("/"))-1]+" = pyfirmata.ArduinoMega('"+port_ad+"')")
-                                          
-                                            
+                                                                                       Check_hardware_board["hardware_"+port_ad.split("/")[len(port_ad.split("/"))-1]] = port_ad                                       
+                                                                    #Get the sensor type of the feedback sensor 
+                                                                    if feedback_sensor_type != {}:
+                                                                             #Check the list of the feedback sensor 
+                                                                             for joints in list(feedback_sensor_type): 
+                                                                                           print("Get the total feedback sensor interception from each joint data ") # Check the intercept of the sensor input list to detect the sensor type enable 
+                                                                                           print(joints,feedback_sensor_type[joints])
+                                                                                           #feedback_signal_intercept[list(feedback_signal_intercept[joints])[0]] = joints    #Get the joints and signal integration 
+
                                            #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
                                                             #Generate the joint controller algorithm  
                                            for joints_com in list(Commu_check_data): 
@@ -610,7 +633,9 @@ def Joint_remote_control():
                                                                                                                           pin_physical_PI = mcus_pins.get(io_list).get('pin_name') #3 Get the pins name         
                                                                                                                           code_gens.write("\n\t"+joints_com+"_"+joint_dats.get(joints_com).get(board_controller).get("mcus_IO")+"_"+io_list+" = hardware_"+port_ad.split("/")[len(port_ad.split("/"))-1]+".get_pin('d:"+str(pin_map.get(pin_physical_PI))+":"+str(io_function)+"')")                   
                                                             
+                       
                                            #Turn_off_data(code_gens)                           
+                       
                        if "I2C" not in list(serial_list):
                                            code_gens.write("import os"+"\nimport json"+"\nimport requests"+"\nimport serial"+"\nimport pyfirmata"+"\nfrom itertools import count") 
                                            code_gens = open("/home/"+user+"/Joint_remote_controller.py",'a')
@@ -625,7 +650,48 @@ def Joint_remote_control():
                                                                                        print("Generate the serial data of joints....")
                                                                                        #port_ad = serial_group.get(joints_com)
                                                                                        print("Serial port address ",port_ad)
-                                                                                       code_gens.write("\n\thardware_"+port_ad.split("/")[len(port_ad.split("/"))-1]+" = pyfirmata.ArduinoMega('"+port_ad+"')")
+                                                                                       code_gens.write("\n\thardware_"+port_ad.split("/")[len(port_ad.split
+                                                                                       
+                                                                                        ("/"))-1]+" = pyfirmata.ArduinoMega('"+port_ad+"')")
+                                                                                       Check_hardware_board["hardware_"+port_ad.split("/")[len(port_ad.split("/"))-1]] = port_ad 
+                                           if feedback_sensor_type != {}:
+                                                                             #Check the list of the feedback sensor 
+                                                                             
+                                                                             #Check the list of the feedback sensor 
+                                                                             for joints in list(feedback_sensor_type): 
+                                                                                           print("Get the total feedback sensor interception from each joint data ") # Check the intercept of the sensor input list to detect the sensor type enable 
+                                                                                           print(joints,list(feedback_sensor_type[joints])[0])
+                                                                                           feedback_signal_intercept[list(feedback_sensor_type[joints])[0]] = joints    #Get the joints and signal integration 
+                                                                                           print(feedback_signal_intercept)
+                                                                             
+                                                                             for joints in list(feedback_sensor_type): 
+                                                                                                  print("Preparing the input of the feedback sensor data and classify each type of the sensor") 
+                                                                                                  signal_type = list(feedback_sensor_type[joints])[0] 
+                                                                                                  if signal_type == "Analog-read": 
+                                                                                                              print("Generate analog input code ")                                                                              
+                                                                                                              #Get the function of the analog input iteration
+                                                                                                              
+                                                                                                              get_analog_pins = feedback_sensor_type[joints].get(signal_type).get('mcus_analog_pin') #.get('mcus_analog_pin')
+                                                                                                              #print("Get pin number ",get_analog_pins);
+                                                                                                              code_gens.write("\n\t"+joints+"_"+signal_type.split("-")[0]+"_"+signal_type.split("-")[1]+" = "+str(get_analog_pins)) #Set the analog define parameter value input 
+                                                                                                              #Get the analog values save  
+                                                                                                               
+                                                                             for signal_feed in list(feedback_signal_intercept): 
+                                                                                                   print("Generate signal feedback intercept ")
+                                                                                                   if signal_feed == "Analog-read":
+                                                                                                                 print("Generate the feedback iteration code ...") 
+                                                                                                                 for board_hardware in list(Check_hardware_board): 
+                                                                                                                             code_gens.write("\n\t"+"Sensor"+"_"+signal_feed.split("-")[0]+"_"+signal_feed.split("-")[1] +"_"+board_hardware.split("_")[1]+" = pyfirmata.util.Iterator("+board_hardware+")") # Get the sensor analog sensor itereation  
+                                                                                                                             code_gens.write("\n\t"+"Sensor"+"_"+signal_feed.split("-")[0]+"_"+signal_feed.split("-")[1]+"_"+board_hardware.split("_")[1]+".start()") #Start the interation of the analog sensor input 
+                                                                                                                             #Get the lst of the analog sensor with the defined value parameter sensor 
+                                                                                                                             for joints in list(feedback_sensor_type): 
+                                                                                                                                             print("Preparing the input of the feedback sensor data and classify each type of the sensor") 
+                                                                                                                                             signal_type = list(feedback_sensor_type[joints])[0] 
+                                                                                                                                             if signal_type == "Analog-read": 
+                                                                                                                                                      print("Generate analog input code ")                                                                              
+                                                                                                                                                      #Get the function of the analog input iteration 
+                                                                                                                                                      #code_gens.write("\n\t"+joints+"_"+signal_type.split("-")[0]+"_"+signal_type.split("-")[1]+" = 0")
+                                                                                                                                                      code_gens.write("\n\t"+board_hardware+".analog["+joints+"_"+signal_type.split("-")[0]+"_"+signal_type.split("-")[1]+"].enable_reporting()") # Get the analog sensor feedback setting                                             
                                            for joints_com in list(Commu_check_data):
                                                         if Commu_check_data.get(joints_com).split(",")[1] == "MCUs":
                                                                                  if Commu_check_data.get(joints_com).split(",")[0] == "Serial":
@@ -644,7 +710,7 @@ def Joint_remote_control():
                                                                                                                    mcus_pins_data = mcus_pins.get('pin_name') # Get the pin name in real-time
                                                                                                                    code_gens.write("\n\t"+joints_com+"_"+joint_dats.get(joints_com).get(board_controller).get("mcus_IO")+" = hardware_"+port_ad.split("/")[len(port_ad.split("/"))-1]+".get_pin('d:"+str(pin_map.get(mcus_pins_data))+":"+io_function+"')")
                                                                                                                    #Get the pins data of the name of joint 
-
+                            
                                                                                                          if mcus_IO == "PWM_output":
                                                                                                                    #Get the pwm data of the serial control of the DC motor
                                                                                                                    io_function = data_io_control.get(mcus_IO)   
@@ -673,7 +739,22 @@ def Joint_remote_control():
                                                               print("Generate microcontroller joint algorithm") 
                                                               if Commu_check_data.get(joints_data).split(",")[0] == "Serial":  # Get  I2C ata communication     
                                                                                   mcus_IO = joint_dats.get(joints_data).get(board_controller).get('mcus_IO')
-                                                                                  if mcus_IO == "Servo_PWM_output":       
+                                                                                  if mcus_IO == "Servo_PWM_output":    
+                                                                                           print("Generating pin remote control")
+                                                                                           if feedback_sensor_type != {}:
+                                                                                                                 print("Generating the analog reader for ")
+                                                                                                                 for signal_feed in list(feedback_signal_intercept): 
+                                                                                                                             print("Generate signal feedback intercept ")
+                                                                                                                             if signal_feed == "Analog-read":
+                                                                                                                                            print("Generate the feedback iteration code ...") 
+                                                                                                                                            for board_hardware in list(Check_hardware_board):
+                                                                                                                                                               print("Generate the algorithm for the analog signal processing") 
+                                                                                                                                                               #Classify type of the joint to set the control algorithm 
+                                                                                                                                                               check_joint_type = list(joint_dats.get(joints_data).get(board_controller).get("Joints_type"))[0] #Get joint type to classify the control algorithm and tuning the optimization function 
+                                                                                                                                                               if check_joint_type == "revolute":
+                                                                                                                                                                               print("Generate the PID control algorithm")
+                                                                                                                                                                               code_gens.write("\n\t\t"+"Analog_signal_"+joints_data+" = "+board_hardware+".analog["+joints_data+"_"+signal_feed.split("-")[0]+"_"+signal_feed.split("-")[1]+"].read()") 
+                                                                                                                                                                               code_gens.write("\n\t\t"+"if Analog_signal_"+joints_data+" != None:"+"\n\t\t\t"+"print(float("+"Analog_signal_"+joints_data+")*360)")         
                                                                                            code_gens.write("\n\t\t"+joints_data+" = joint_motion.get('"+joints_data+"')")  # Get the joint motion control 
                                                                                            code_gens.write("\n\t\t"+"print('Joint "+joints_data+"',"+joints_data+",abs(float("+joints_data+")))")
                                                                                            #Get joint status
@@ -684,6 +765,20 @@ def Joint_remote_control():
             
                                                                                   if mcus_IO == "PWM_output":
                                                                                                         print("Generating pin remote control")
+                                                                                                        if feedback_sensor_type != {}:
+                                                                                                                 print("Generating the analog reader for ")
+                                                                                                                 for signal_feed in list(feedback_signal_intercept): 
+                                                                                                                             print("Generate signal feedback intercept ")
+                                                                                                                             if signal_feed == "Analog-read":
+                                                                                                                                            print("Generate the feedback iteration code ...") 
+                                                                                                                                            for board_hardware in list(Check_hardware_board):
+                                                                                                                                                               print("Generate the algorithm for the analog signal processing") 
+                                                                                                                                                               #Classify type of the joint to set the control algorithm 
+                                                                                                                                                               check_joint_type = list(joint_dats.get(joints_data).get(board_controller).get("Joints_type"))[0] #Get joint type to classify the control algorithm and tuning the optimization function 
+                                                                                                                                                               if check_joint_type == "revolute":
+                                                                                                                                                                               print("Generate the PID control algorithm")
+                                                                                                                                                                               code_gens.write("\n\t\t"+"Analog_signal_"+joints_data+" = "+board_hardware+".analog["+joints_data+"_"+signal_feed.split("-")[0]+"_"+signal_feed.split("-")[1]+"].read()") 
+                                                                                                                                                                               code_gens.write("\n\t\t"+"if Analog_signal_"+joints_data+" != None:"+"\n\t\t\t"+"print(float("+"Analog_signal_"+joints_data+")*360)")      
                                                                                                         io_function = joint_dats.get(joints_data).get(board_controller).get(mcus_IO) 
                                                                                                         mcus_pins = joint_dats.get(joints_data).get(board_controller).get('mcus_pins') 
                                                                                                         mcus_fam = joint_dats.get(joints_data).get(board_controller).get('mcus_families')
@@ -743,11 +838,35 @@ def Joint_remote_control():
                                        configfile = open(Generate_path+"/"+project_name+".service",'w')
                                        config.write(configfile)
                                        os.system("sudo chmod -R 777 "+Generate_path+"/"+project_name+".service")
-                                       time.sleep(8)
                                        os.system("sudo systemctl daemon-reload") 
                                        os.system("sudo systemctl enable "+project_name+".service") 
                                        os.system("sudo systemctl restart "+project_name+".service")
                                        Turn_off_data(user,extract_data,data_joint_update,code_gens,Live_URL)
+                       #Processing the joint data of fedback sensor to send back the data to the main system                                                                
+                       if feedback_sensor_type !={}:
+                               #Recall the function of the joint data to add data into the code 
+                               for joints in list(feedback_sensor_type):
+                                                         print("Preparing the input of the feedback sensor data and classify each type of the sensor") 
+                                                         signal_type = list(feedback_sensor_type[joints])[0] 
+                                                         if signal_type == "Analog-read": 
+                                                                    print("Generate analog input code ")                                                                              
+                                                                    payload_joints_container.append("'"+joints+"':{'"+signal_type+"':"+"float(Analog_signal_"+joints+")*360},")       
+                                                                    
+                               #Generate the feedback code data to run the motion control into the web 
+                               #In the process running procedure always check the data of index to detect the last value of the data in list and remove comma 
+                               print("Feedback payload data ",payload_joints_container)
+                               
+                               for fbs in range(0,len(payload_joints_container)):
+                                                   if payload_joints_container[fbs] != payload_joints_container[len(payload_joints_container)-1]:
+                                                                                payload_feedback.append(payload_joints_container[fbs]) 
+                                                   if payload_joints_container[fbs] == payload_joints_container[len(payload_joints_container)-1]: 
+                                                                                payload_feedback.append(payload_joints_container[fbs].split(",")[0])                                                
+                               
+                               payload_feedback.append("}") 
+                               data_combiner = "".join(payload_feedback) 
+                               code_gens.write("\n\t\tAccount_data = open('/home/"+user+"/RoboreactorGenFlow/data_token_secret.json','r')") 
+                               code_gens.write("\n\t\tdata_account = json.loads(Account_data.read()).get('Account')") 
+                               code_gens.write("\n\t\tres = requests.post('"+Live_URL+"/feedback_sensor',json={data_account:"+data_combiner+"})") #Feedback data json   
                        code_gens.write("\n\texcept:\n\t\tprint('Package iot control server not found!')")                                                                                                                                                                        
                        code_gens.close()
                        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>...
