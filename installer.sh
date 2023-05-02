@@ -198,6 +198,7 @@ sudo ppt-gip3 install jiwer
 sudo pip3 install geopy # Geopy for the location positioning from the gps 
 sudo pip3 install SpeechRecognition
 sudo pip3 install pygltflib
+sudo apt-get install bluetooth libbluetooth-dev -y
 sudo pip3 install pybluez 
 sudo pip3 install nltk --upgrade 
 sudo apt-get install libbluetooth-dev -y 
