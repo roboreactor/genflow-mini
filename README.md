@@ -109,10 +109,8 @@ bash installer.sh
 <div align="right">[ <a href="#roboreactor-genflow-mini">☝️to top </a> ]</div>
 <br>
 
-# Credits
 
-## inspired by
 
-- KevinOConnor [Klipper](https://github.com/Klipper3d/klipper)
+
 
 <div align="right">[ <a href="#roboreactor-genflow-mini">☝️to top </a> ]</div>
