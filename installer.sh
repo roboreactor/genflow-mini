@@ -302,6 +302,8 @@ cd ~/  # Get inside the printrun and install the file automatically
 sudo apt-get install libportaudio2 -y 
 sudo apt-get install flac -y 
 sudo pip3 install flask 
+sudo apt-get autoremove python3-blinker -y 
+sudo pip3 install jwt 
 echo "Autentication login"
 sudo pip3 install flask-Login
 sudo pip3 install flask-SQLAlchemy
