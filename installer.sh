@@ -153,7 +153,8 @@ sudo apt-get install htop -y
 sudo apt-get install snap -y
 curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
 sudo apt-get install rust -y
-#sudo apt-get install arduino -y 
+#sudo apt-get install arduino -y  
+sudo apt install pipx -y 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 echo "Install i2c data"
