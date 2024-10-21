@@ -173,6 +173,7 @@ sudo pip3 install smbus  #install the smbus protocol for communication with the 
 sudo pip3 install smbus2 #install the smbus2 protocol for the communication with the sensors onboard devices of the robot automation
 sudo pip3 install Adafruit-Blinka
 sudo pip3 install bmp280 #install the bmp280 for the Barometer and temoerature sensor
+sudo pip3 install pyudev 
 sudo pip3 install pyinstaller # Pyinstaller function of the single execuable file 
 sudo pip3 install adafruit-circuitpython-mpu6050
 sudo pip3 install adafruit-circuitpython-icm20x 
