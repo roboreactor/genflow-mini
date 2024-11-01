@@ -156,7 +156,8 @@ sudo apt-get install rust -y
 #sudo apt-get install arduino -y  
 sudo apt install pipx -y 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+sudo pip3 install pyudev 
+sudo pip3 install fastapi 
 echo "Install i2c data"
 sudo apt-get install i2c-tools -y 
 sudo pip3 install i2csense # install the i2 sensor library for upgrading the connection between the i2c sensors module
